@@ -42,7 +42,7 @@ export function FanMenu() {
 		setIsOpen(open);
 
 		await controls.start({
-			scale: 1.15,
+			scale: 1.10,
 			boxShadow: cssVar('shadow-md'),
 			transition: { duration: 0.1, ease: [0.16, 1, 0.3, 1] },
 		});
@@ -89,6 +89,7 @@ export function FanMenu() {
 							<motion.div
 								key={e.label}
 								className={css.chips}
+								whileHover={{ scale: 1.1, transition: { type: 'spring', stiffness: 150, damping: 10 } }}
 								initial={{
 									filter: 'blur(16px)',
 									opacity: 0,

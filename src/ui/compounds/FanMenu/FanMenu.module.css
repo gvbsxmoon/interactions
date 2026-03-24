@@ -20,6 +20,7 @@
 	bottom: 48px;
 	translate: -50% 0;
 	display: flex;
+	cursor: pointer;
 	gap: var(--radius-sm);
 	padding: 8px 12px;
 	align-items: center;

@@ -1,10 +1,10 @@
 import css from './App.module.css';
-import { FanMenu } from './ui/compounds/FanMenu';
+import { ControlPanel } from '@compounds/ControlPanel';
 
 function App() {
 	return (
 		<main className={css.main}>
-			<FanMenu />
+			<ControlPanel />
 		</main>
 	);
 }
