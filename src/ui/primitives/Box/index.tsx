@@ -1,5 +1,11 @@
 import css from './Box.module.css';
 
-export function Box({ children }: React.PropsWithChildren) {
-	return <div className={css.layout}>{children}</div>;
+type BoxProps = React.PropsWithChildren<{ ref?: React.Ref<HTMLDivElement> }>;
+
+export function Box({ ref, children }: BoxProps) {
+	return (
+		<div ref={ref} className={css.layout}>
+			{children}
+		</div>
+	);
 }

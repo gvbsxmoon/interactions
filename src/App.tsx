@@ -1,5 +1,5 @@
 import css from './App.module.css';
-import { FanMenu } from './ui/groups/FanMenu';
+import { FanMenu } from './ui/compounds/FanMenu';
 
 function App() {
 	return (

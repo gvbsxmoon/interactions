@@ -1,13 +1,8 @@
-.container {
-	height: 100%;
-	display: flex;
-	flex-direction: column;
-	justify-content: end;
-	padding-bottom: 48px;
-}
-
 .plusButton {
-	position: relative;
+	position: absolute;
+	left: 50%;
+	bottom: 48px;
+	translate: -50% 0;
 	width: 56px;
 	background-color: var(--bg);
 	display: flex;
@@ -16,10 +11,14 @@
 	aspect-ratio: 1/1;
 	border-radius: 100%;
 	border: 2px solid var(--border);
+	cursor: pointer;
 }
 
 .chips {
 	position: absolute;
+	left: 50%;
+	bottom: 48px;
+	translate: -50% 0;
 	display: flex;
 	gap: var(--radius-sm);
 	padding: 8px 12px;
