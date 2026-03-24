@@ -1,5 +1,8 @@
+/* letters pull up */
+.lettersPullUp {
+	display: flex;
+}
 /* switch classes */
-
 .switch {
 	position: relative;
 	display: inline-block;
@@ -13,7 +16,6 @@
 	height: 0;
 }
 
-/* The slider */
 .slider {
 	position: absolute;
 	cursor: pointer;
@@ -21,7 +23,7 @@
 	left: 0;
 	right: 0;
 	bottom: 0;
-	background-color: /* var(--surface) */ black;
+	background-color: var(--surface);
 	-webkit-transition: 0.25s;
 	transition: 0.25s;
 	border-radius: 34px;
@@ -52,9 +54,9 @@ input:checked + .slider:before {
 
 /* container */
 .container {
-	padding: 8px;
-  min-width: 220px;
-	border-radius: var(--radius-lg);
+	padding: 6px;
+	min-width: 220px;
+	border-radius: var(--radius-xl);
 	box-shadow: var(--shadow-sm);
 	background-color: var(--bg);
 }
@@ -63,9 +65,9 @@ input:checked + .slider:before {
 .header {
 	display: flex;
 	align-items: center;
-  justify-content: space-between;
-  padding-inline: 8px;
-  padding-block: 8px 12px;
+	justify-content: space-between;
+	padding-inline: 8px;
+	padding-block: 8px 12px;
 }
 
 .headerLabels h1 {
@@ -78,16 +80,78 @@ input:checked + .slider:before {
 	letter-spacing: 0.3px;
 }
 
+/* settings */
+.settings {
+	background-color: var(--surface);
+	border-radius: var(--radius-lg);
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+.mode {
+	background-color: var(--bg);
+	width: calc(100% - 12px);
+	margin: 6px;
+	border-radius: var(--radius-md);
+	font-size: 10px;
+	font-weight: 500;
+	color: var(--text-secondary);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 8px;
+	cursor: pointer;
+}
+
 /* temperature */
 .temperature {
 	background-color: var(--surface);
 	padding: 6px;
-	border-radius: var(--radius-sm);
+	border-radius: var(--radius-lg);
 	width: 100%;
+	display: flex;
+	margin-bottom: 8px;
 }
 
-.selector {
-	height: 24px;
+.temperature h2 {
+	flex: 1;
+	text-align: center;
+}
+
+.temperatureButton {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 32px;
+	border-radius: var(--radius-md);
+	background: white;
+	color: var(--text);
+	border: none;
+}
+
+/* manual settings */
+.manualSettings {
+	width: calc(100% - 2px);
 	background-color: var(--bg);
-	border-radius: var(--radius-sm);
+	border-radius: var(--radius-lg);
+	margin: 8px 1px 1px 1px;
+	height: 80px;
+	padding: 10px;
+}
+
+.fanSpeed {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	font-size: 10px;
+	color: var(--text-secondary);
+	font-weight: 500;
+}
+
+.stepper {
+	width: 96px;
+	height: 30px;
+	background-color: var(--surface-raised);
+	border-radius: var(--radius-md);
 }
