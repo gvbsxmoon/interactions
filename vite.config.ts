@@ -8,8 +8,6 @@ export default defineConfig({
 	resolve: {
 		alias: {
 			'@': path.resolve(__dirname, './src'),
-			'@primitives': path.resolve(__dirname, './src/ui/primitives'),
-			'@compounds': path.resolve(__dirname, './src/ui/compounds'),
 		},
 	},
 	plugins: [react(), babel({ presets: [reactCompilerPreset()] })],

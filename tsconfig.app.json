@@ -9,9 +9,7 @@
 		"skipLibCheck": true,
 		"baseUrl": "./",
 		"paths": {
-			"@/*": ["./src/*"],
-      "@primitives/*": ["./src/ui/primitives/*"],
-      "@compounds/*": ["./src/ui/compounds/*"],
+			"@/*": ["./src/*"]
 		},
 
 		/* Bundler mode */

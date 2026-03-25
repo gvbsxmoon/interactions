@@ -71,7 +71,7 @@
 	--radius-sm: 6px;
 	--ease: cubic-bezier(0.16, 1, 0.3, 1);
 	--duration: 180ms;
-	--shadow-md: 0 0 24px 2px rgba(0, 0, 0, 0.04);
+	--shadow-md: 0 0 24px 2px rgba(0, 0, 0, 0.08);
 	--shadow-sm: 0 0 16px rgba(0, 0, 0, 0.04);
 }
 

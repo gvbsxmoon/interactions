@@ -1,0 +1,27 @@
+.stepper {
+	position: relative;
+	width: 96px;
+	height: 26px;
+	background-color: var(--surface);
+	border-radius: var(--radius-md);
+	cursor: pointer;
+	touch-action: none;
+	overflow: hidden;
+}
+
+.stepperFill {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	background-color: var(--green);
+	border-radius: var(--radius-md);
+	pointer-events: none;
+	color: var(--bg);
+	display: flex;
+	align-items: center;
+	justify-content: end;
+	padding-right: 12px;
+	font-size: 14px;
+	user-select: none;
+}

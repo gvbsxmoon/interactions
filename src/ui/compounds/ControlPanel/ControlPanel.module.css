@@ -1,57 +1,3 @@
-/* letters pull up */
-.lettersPullUp {
-	display: flex;
-}
-/* switch classes */
-.switch {
-	position: relative;
-	display: inline-block;
-	width: 34px;
-	height: 18px;
-}
-
-.switch input {
-	opacity: 0;
-	width: 0;
-	height: 0;
-}
-
-.slider {
-	position: absolute;
-	cursor: pointer;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	background-color: var(--surface);
-	-webkit-transition: 0.25s;
-	transition: 0.25s;
-	border-radius: 34px;
-}
-
-.slider:before {
-	position: absolute;
-	content: '';
-	height: 16px;
-	width: 16px;
-	left: 1px;
-	bottom: 1px;
-	background-color: white;
-	-webkit-transition: 0.25s;
-	transition: 0.25s;
-	border-radius: 50%;
-}
-
-input:checked + .slider {
-	background-color: var(--text);
-}
-
-input:checked + .slider:before {
-	-webkit-transform: translateX(16px);
-	-ms-transform: translateX(16px);
-	transform: translateX(16px);
-}
-
 /* container */
 .container {
 	padding: 6px;
@@ -67,7 +13,7 @@ input:checked + .slider:before {
 	align-items: center;
 	justify-content: space-between;
 	padding-inline: 8px;
-	padding-block: 8px 12px;
+	padding-block: 8px 10px;
 }
 
 .headerLabels h1 {
@@ -87,6 +33,7 @@ input:checked + .slider:before {
 	width: 100%;
 	display: flex;
 	flex-direction: column;
+	margin-top: 10px;
 }
 
 .mode {
@@ -111,12 +58,16 @@ input:checked + .slider:before {
 	border-radius: var(--radius-lg);
 	width: 100%;
 	display: flex;
-	margin-bottom: 8px;
 }
 
-.temperature h2 {
-	flex: 1;
+.temperatureLabel {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	text-align: center;
+	flex: 1;
+	font-weight: bold;
+	font-size: 20px;
 }
 
 .temperatureButton {
@@ -130,14 +81,47 @@ input:checked + .slider:before {
 	border: none;
 }
 
+.temperatureButton:disabled {
+	opacity: 0.2;
+	cursor: auto;
+}
+
+/* ac modes */
+.acModes {
+	display: flex;
+	gap: 6px;
+	background-color: var(--surface);
+	border-radius: var(--radius-md);
+	margin-bottom: 10px;
+	padding: 1px;
+}
+
+.acModeButton {
+	flex: 1;
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 42px;
+	border: none;
+	background: none;
+	cursor: pointer;
+}
+
+.acModeIndicator {
+	position: absolute;
+	inset: 0;
+	border-radius: var(--radius-md);
+	background: var(--bg);
+}
+
 /* manual settings */
 .manualSettings {
 	width: calc(100% - 2px);
 	background-color: var(--bg);
 	border-radius: var(--radius-lg);
-	margin: 8px 1px 1px 1px;
-	height: 80px;
-	padding: 10px;
+	margin: 4px 1px 1px 1px;
+	padding: 6px;
 }
 
 .fanSpeed {
@@ -147,11 +131,21 @@ input:checked + .slider:before {
 	font-size: 10px;
 	color: var(--text-secondary);
 	font-weight: 500;
+	padding-left: 8px;
 }
 
-.stepper {
-	width: 96px;
-	height: 30px;
-	background-color: var(--surface-raised);
+/* button */
+.button {
+	border: none;
+	background: var(--text);
+	color: var(--bg);
+	font-size: 12px;
 	border-radius: var(--radius-md);
+	width: 100%;
+	padding-block: 6px;
+	margin-top: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 6px;
 }

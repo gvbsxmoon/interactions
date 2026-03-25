@@ -1,16 +1,16 @@
 import { useRef, useState } from 'react';
-import { Plus, Image, Video, Music, FileBarChart, BookOpen, Rotate3D } from 'lucide-react';
+import { Plus, Image, Music, FileBarChart, BookOpen } from 'lucide-react';
 import { AnimatePresence, motion, useAnimation } from 'framer-motion';
-import { Box } from '../../primitives/Box';
+import { Box } from '@/ui/primitives';
 import css from './FanMenu.module.css';
 import { cssVar } from '../../../lib/utils';
 
-type ChipsProps = {
+type MenuData = {
 	label: string;
 	icon: React.ReactNode;
 };
 
-const menuData: ChipsProps[] = [
+const menuData: MenuData[] = [
 	{
 		label: 'Documents',
 		icon: <FileBarChart size={16} strokeWidth={2.5} />,
@@ -42,7 +42,7 @@ export function FanMenu() {
 		setIsOpen(open);
 
 		await controls.start({
-			scale: 1.10,
+			scale: 1.1,
 			boxShadow: cssVar('shadow-md'),
 			transition: { duration: 0.1, ease: [0.16, 1, 0.3, 1] },
 		});

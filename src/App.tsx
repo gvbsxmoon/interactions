@@ -1,5 +1,5 @@
 import css from './App.module.css';
-import { ControlPanel } from '@compounds/ControlPanel';
+import { ControlPanel } from '@/ui/compounds';
 
 function App() {
 	return (
