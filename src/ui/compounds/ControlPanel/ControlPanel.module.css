@@ -5,6 +5,7 @@
 	border-radius: var(--radius-xl);
 	box-shadow: var(--shadow-sm);
 	background-color: var(--bg);
+	user-select: none;
 }
 
 /* header */
@@ -33,7 +34,6 @@
 	width: 100%;
 	display: flex;
 	flex-direction: column;
-	margin-top: 10px;
 }
 
 .mode {
@@ -120,8 +120,8 @@
 	width: calc(100% - 2px);
 	background-color: var(--bg);
 	border-radius: var(--radius-lg);
-	margin: 4px 1px 1px 1px;
-	padding: 6px;
+	margin-inline: 1px;
+	margin-bottom: 1px;
 }
 
 .fanSpeed {
@@ -132,20 +132,4 @@
 	color: var(--text-secondary);
 	font-weight: 500;
 	padding-left: 8px;
-}
-
-/* button */
-.button {
-	border: none;
-	background: var(--text);
-	color: var(--bg);
-	font-size: 12px;
-	border-radius: var(--radius-md);
-	width: 100%;
-	padding-block: 6px;
-	margin-top: 10px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	gap: 6px;
 }

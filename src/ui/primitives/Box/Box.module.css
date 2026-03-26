@@ -1,6 +1,6 @@
 .layout {
 	width: 400px;
-	aspect-ratio: 1/1;
+	height: 400px;
 	position: relative;
 	display: flex;
 	justify-content: center;

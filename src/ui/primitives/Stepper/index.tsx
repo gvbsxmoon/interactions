@@ -6,12 +6,15 @@ import { AnimatedText } from '@/ui/primitives';
 
 type StepperProps = {
 	steps?: number;
+	current: number;
+	onChange: (current: number) => void;
 };
 
-export function Stepper({ steps = 3 }: StepperProps) {
-	const [step, setStep] = useState(1);
-
+export function Stepper({ steps = 3, current, onChange }: StepperProps) {
 	const trackRef = useRef<HTMLDivElement>(null);
+
+	// avoid external state triggering until the pointer hasn't released
+	const [internalStep, setInternalStep] = useState(current);
 
 	const getStep = (clientX: number) => {
 		const track = trackRef.current;
@@ -30,7 +33,7 @@ export function Stepper({ steps = 3 }: StepperProps) {
 		if (!track) return;
 
 		track.setPointerCapture(e.pointerId);
-		setStep(getStep(e.clientX));
+		setInternalStep(getStep(e.clientX));
 	};
 
 	const handlePointerMove = (e: React.PointerEvent) => {
@@ -38,7 +41,7 @@ export function Stepper({ steps = 3 }: StepperProps) {
 		if (!track) return;
 
 		if (track.hasPointerCapture(e.pointerId)) {
-			setStep(getStep(e.clientX));
+			setInternalStep(getStep(e.clientX));
 		}
 	};
 
@@ -47,16 +50,17 @@ export function Stepper({ steps = 3 }: StepperProps) {
 		if (!track) return;
 
 		if (track.hasPointerCapture(e.pointerId)) {
+			onChange(internalStep);
 			track.releasePointerCapture(e.pointerId);
 		}
 	};
 
-	const fillerWidth = (step / 3) * 100;
+	const fillerWidth = (internalStep / 3) * 100;
 
 	return (
 		<div className={css.stepper} ref={trackRef} onPointerDown={handlePointerDown} onPointerUp={handlePointerUp} onPointerMove={handlePointerMove}>
 			<motion.div className={css.stepperFill} animate={{ width: `${fillerWidth}%` }} transition={{ type: 'spring', stiffness: 400, damping: 40 }}>
-				<AnimatedText text={step.toString()} />
+				<AnimatedText text={internalStep.toString()} />
 			</motion.div>
 		</div>
 	);

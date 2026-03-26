@@ -1,0 +1,9 @@
+.grid {
+	display: grid;
+	grid-template-rows: 0fr;
+}
+
+.content {
+	overflow: hidden;
+	min-height: 0;
+}

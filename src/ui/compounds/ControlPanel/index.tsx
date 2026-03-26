@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { AnimatePresence, motion, type Variants } from 'motion/react';
-import { Box, AnimatedText, Toggle, Stepper, Loader } from '@/ui/primitives';
+import { motion } from 'motion/react';
+import { Box, AnimatedText, Toggle, Stepper, Collapsible, Button } from '@/ui/primitives';
 import { ChevronsUpDown, Droplets, Minus, Plus, Snowflake, Sun } from 'lucide-react';
 
 import { cssVar } from '@/lib/utils';
@@ -15,13 +15,11 @@ const acModes = [
 
 type AcMode = (typeof acModes)[number]['id'];
 
-function AcModePane() {
-	const [acMode, setAcMode] = useState<AcMode>('cool');
-
+function AcModePane({ acMode, onAcModeChange }: { acMode: AcMode; onAcModeChange: (current: AcMode) => void }) {
 	return (
 		<div className={css.acModes}>
 			{acModes.map(({ id, icon: Icon, color }) => (
-				<button key={id} className={css.acModeButton} onClick={() => setAcMode(id)}>
+				<button key={id} className={css.acModeButton} onClick={() => onAcModeChange(id)}>
 					{acMode === id && (
 						<motion.div className={css.acModeIndicator} layoutId='acModeIndicator' transition={{ type: 'spring', stiffness: 400, damping: 40 }} />
 					)}
@@ -32,43 +30,28 @@ function AcModePane() {
 	);
 }
 
-const blurInVariant: Variants = {
-	initial: {
-		height: 0,
-		filter: 'blur(16px)',
-		opacity: 0,
-	},
-	animate: {
-		height: 'auto',
-		opacity: 1,
-		filter: 'blur(0px)',
-		transition: {
-			type: 'spring',
-			stiffness: 150,
-			damping: 18,
-		},
-	},
-	exit: {
-		height: 0,
-		opacity: 0,
-		filter: 'blur(8px)',
-		transition: {
-			type: 'spring',
-			stiffness: 150,
-			damping: 18,
-		},
-	},
-};
+type SettingsMode = 'Automatic' | 'Manual';
 
 export function ControlPanel() {
-	const [active, setActive] = useState<boolean>(false);
-	const [temperature, setTemperature] = useState<number>(22);
-	const [mode, setMode] = useState<'Automatic' | 'Manual'>('Automatic');
+	const [active, setActive] = useState(false);
+	const [fanSpeed, setFanSpeed] = useState(1);
+	const [temperature, setTemperature] = useState(22);
+	const [acMode, setAcMode] = useState<AcMode>('cool');
+	const [mode, setMode] = useState<SettingsMode>('Automatic');
+	const [isDirty, setIsDirty] = useState(false);
 
-	const changeMode = () => {
-		if (mode === 'Automatic') setMode('Manual');
-		if (mode === 'Manual') setMode('Automatic');
+	const handleAcModeChange = (m: AcMode) => {
+		setAcMode(m);
+		setIsDirty(true);
 	};
+	const handleFanSpeedChange = (s: number) => {
+		setFanSpeed(s);
+		setIsDirty(true);
+	};
+	const applySettings = () => setIsDirty(false);
+	const decrementTemp = () => setTemperature(t => t - 1);
+	const incrementTemp = () => setTemperature(t => t + 1);
+	const changeMode = () => setMode(m => (m === 'Automatic' ? 'Manual' : 'Automatic'));
 
 	return (
 		<Box>
@@ -82,43 +65,38 @@ export function ControlPanel() {
 					<Toggle checked={active} onChange={setActive} />
 				</div>
 
+				{/* temperature control */}
 				<div className={css.temperature}>
-					<button className={css.temperatureButton} onClick={() => setTemperature(temp => temp - 1)} disabled={temperature <= 16 || !active}>
+					<button className={css.temperatureButton} onClick={decrementTemp} disabled={temperature <= 16 || !active}>
 						<Minus strokeWidth={3} size={16} />
 					</button>
 					<AnimatedText text={`${temperature}°`} className={css.temperatureLabel} />
-					<button className={css.temperatureButton} onClick={() => setTemperature(temp => temp + 1)} disabled={temperature >= 30 || !active}>
+					<button className={css.temperatureButton} onClick={incrementTemp} disabled={temperature >= 30 || !active}>
 						<Plus strokeWidth={3} size={16} />
 					</button>
 				</div>
 
-				<AnimatePresence>
-					{active && (
-						<motion.div className={css.settings} variants={blurInVariant} {...blurInVariant} style={{ overflow: 'hidden' }}>
-							<div className={css.mode} onClick={changeMode}>
-								<AnimatedText stagger={0.02} text={mode} />
-								<ChevronsUpDown size={14} />
-							</div>
-							<AnimatePresence>
-								{mode === 'Manual' && (
-									<motion.div className={css.manualSettings} {...blurInVariant} style={{ overflow: 'hidden' }}>
-										<AcModePane />
-										<div className={css.fanSpeed}>
-											Fan speed
-											<Stepper />
-										</div>
-										<AnimatePresence>
-											<button className={css.button}>
-												<Loader />
-												Apply changes
-											</button>
-										</AnimatePresence>
-									</motion.div>
-								)}
-							</AnimatePresence>
-						</motion.div>
-					)}
-				</AnimatePresence>
+				<Collapsible open={active} className={css.settings} margin={10} blur>
+					{/* settings mode handler */}
+					<div className={css.mode} onClick={changeMode}>
+						<AnimatedText stagger={0.02} text={mode} />
+						<ChevronsUpDown size={14} />
+					</div>
+
+					{/* manual settings panel */}
+					<Collapsible open={mode === 'Manual'} className={css.manualSettings} margin={4} padding={6} blur>
+						<AcModePane acMode={acMode} onAcModeChange={handleAcModeChange} />
+						<div className={css.fanSpeed}>
+							Fan speed
+							<Stepper current={fanSpeed} onChange={handleFanSpeedChange} />
+						</div>
+						<Collapsible open={isDirty} margin={10} blur>
+							<Button async onAsyncComplete={applySettings}>
+								Apply
+							</Button>
+						</Collapsible>
+					</Collapsible>
+				</Collapsible>
 			</div>
 		</Box>
 	);
