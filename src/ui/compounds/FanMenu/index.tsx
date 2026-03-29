@@ -1,31 +1,35 @@
 import { useRef, useState } from 'react';
 import { Plus, Image, Music, FileBarChart, BookOpen } from 'lucide-react';
-import { AnimatePresence, motion, useAnimation } from 'framer-motion';
+import { AnimatePresence, motion, useAnimation, type Transition } from 'framer-motion';
 import { Box } from '@/ui/primitives';
+import { cssVar } from '@/lib/utils';
+
 import css from './FanMenu.module.css';
-import { cssVar } from '../../../lib/utils';
 
 type MenuData = {
 	label: string;
 	icon: React.ReactNode;
 };
 
+const defaultComponentIconStyle = { size: 16, strokeWidth: 2.5 };
+const defaultComponentTransition: Transition = { type: 'spring', stiffness: 150, damping: 18 };
+
 const menuData: MenuData[] = [
 	{
 		label: 'Documents',
-		icon: <FileBarChart size={16} strokeWidth={2.5} />,
+		icon: <FileBarChart {...defaultComponentIconStyle} />,
 	},
 	{
 		label: 'Research',
-		icon: <BookOpen size={16} strokeWidth={2.5} />,
+		icon: <BookOpen {...defaultComponentIconStyle} />,
 	},
 	{
 		label: 'Music',
-		icon: <Music size={16} strokeWidth={2.5} />,
+		icon: <Music {...defaultComponentIconStyle} />,
 	},
 	{
 		label: 'Pictures',
-		icon: <Image size={16} strokeWidth={2.5} />,
+		icon: <Image {...defaultComponentIconStyle} />,
 	},
 ];
 
@@ -66,7 +70,7 @@ export function FanMenu() {
 		const radius = Math.sqrt(bx * bx + by * by);
 		const buttonAngle = Math.atan2(by, bx);
 
-		const endAngle = 80 * (Math.PI / 180);
+		const endAngle = 75 * (Math.PI / 180);
 
 		const angle_i = i * ((endAngle - buttonAngle) / (menuData.length - 1));
 
@@ -89,7 +93,7 @@ export function FanMenu() {
 							<motion.div
 								key={e.label}
 								className={css.chips}
-								whileHover={{ scale: 1.1, transition: { type: 'spring', stiffness: 150, damping: 10 } }}
+								whileHover={{ scale: 1.1, transition: defaultComponentTransition }}
 								initial={{
 									filter: 'blur(16px)',
 									opacity: 0,
@@ -103,11 +107,7 @@ export function FanMenu() {
 									x: positions[i]?.x,
 									y: positions[i]?.y,
 									rotate: positions[i]?.rotate,
-									transition: {
-										type: 'spring',
-										stiffness: 150,
-										damping: 18,
-									},
+									transition: defaultComponentTransition,
 								}}
 								exit={{
 									opacity: 0,
@@ -125,7 +125,7 @@ export function FanMenu() {
 						))}
 				</AnimatePresence>
 				<motion.div ref={buttonRef} className={css.plusButton} animate={controls} onClick={handleClick}>
-					<Plus strokeWidth={3} />
+					<Plus strokeWidth={2.5} />
 				</motion.div>
 			</Box>
 		</>

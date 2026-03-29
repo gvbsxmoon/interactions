@@ -1,0 +1,72 @@
+.sidebar {
+	max-width: 65%;
+	height: 100%;
+	margin-top: 40px;
+	margin-left: 8px;
+	background-color: var(--bg);
+	border-radius: var(--radius-lg);
+	display: flex;
+	flex-direction: column;
+	align-items: end;
+}
+
+.sidebarIcon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: var(--radius-sm);
+	background: none;
+	border: none;
+	cursor: pointer;
+	position: absolute;
+	top: 48px;
+	left: 14px;
+	padding: 4px;
+	z-index: 3;
+}
+
+.sidebarIcon svg:active {
+	stroke: var(--text-secondary);
+	scale: 1.1;
+}
+
+.sidebarIcon.open:hover {
+	background: var(--surface-raised);
+}
+
+.sidebarColumn {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	margin-top: 32px;
+}
+
+.sidebarRow {
+	position: relative;
+	display: flex;
+	align-items: center;
+	height: 32px;
+	padding-left: 12px;
+	border-radius: var(--radius-md);
+	font-size: 12px;
+	font-weight: 500;
+	color: var(--text-muted);
+	cursor: pointer;
+}
+
+.sidebarRow span {
+	position: relative;
+	z-index: 2;
+}
+
+.sidebarRow span.sidebarRowSelected {
+	color: var(--text);
+}
+
+.sidebarRowOverlay {
+	position: absolute;
+	inset: 0;
+	background-color: var(--surface-raised);
+	border-radius: inherit;
+}

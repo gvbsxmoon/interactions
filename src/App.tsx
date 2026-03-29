@@ -1,11 +1,12 @@
 import css from './App.module.css';
-import { ControlPanel, FanMenu } from '@/ui/compounds';
+import { ControlPanel, FanMenu, Sidebar } from '@/ui/compounds';
 
 function App() {
 	return (
 		<main className={css.main}>
-			<FanMenu />
-			<ControlPanel />
+			<Sidebar />
+
+			{/* <ControlPanel /> */}
 		</main>
 	);
 }

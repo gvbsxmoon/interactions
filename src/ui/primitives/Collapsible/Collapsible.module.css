@@ -1,9 +1,25 @@
 .grid {
 	display: grid;
+	height: 100%;
+	width: 100%;
+}
+
+.gridVertical {
 	grid-template-rows: 0fr;
+}
+
+.gridHorizontal {
+	grid-template-columns: 0fr;
 }
 
 .content {
 	overflow: hidden;
+}
+
+.contentVertical {
 	min-height: 0;
+}
+
+.contentHorizontal {
+	min-width: 0;
 }

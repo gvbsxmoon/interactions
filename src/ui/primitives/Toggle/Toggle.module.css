@@ -38,7 +38,7 @@
 }
 
 input:checked + .toggle {
-	background-color: var(--green);
+	background-color: var(--orange);
 }
 
 input:checked + .toggle:before {

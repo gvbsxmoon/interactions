@@ -3,6 +3,7 @@
 	width: 96px;
 	height: 26px;
 	background-color: var(--surface);
+
 	border-radius: var(--radius-md);
 	cursor: pointer;
 	touch-action: none;
@@ -14,7 +15,7 @@
 	top: 0;
 	left: 0;
 	height: 100%;
-	background-color: var(--green);
+	background-color: var(--orange);
 	border-radius: var(--radius-md);
 	pointer-events: none;
 	color: var(--bg);

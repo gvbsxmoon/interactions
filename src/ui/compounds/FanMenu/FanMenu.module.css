@@ -3,12 +3,12 @@
 	left: 50%;
 	bottom: 48px;
 	translate: -50% 0;
-	width: 56px;
+	width: 48px;
+	aspect-ratio: 1/1;
 	background-color: var(--bg);
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	aspect-ratio: 1/1;
 	border-radius: 100%;
 	border: 2px solid var(--border);
 	cursor: pointer;

@@ -1,12 +1,13 @@
 import { useState } from 'react';
-import { motion } from 'motion/react';
-import { Box, AnimatedText, Toggle, Stepper, Collapsible, Button } from '@/ui/primitives';
+import { motion, type Transition } from 'motion/react';
 import { ChevronsUpDown, Droplets, Minus, Plus, Snowflake, Sun } from 'lucide-react';
-
+import { Box, AnimatedText, Toggle, Stepper, Collapsible, Button } from '@/ui/primitives';
 import { cssVar } from '@/lib/utils';
+
 import css from './ControlPanel.module.css';
 
-/* AC MODE */
+const defaultComponentTransition: Transition = { type: 'spring', stiffness: 300, damping: 30 };
+
 const acModes = [
 	{ id: 'heat', icon: Sun, color: '#F59E0B' },
 	{ id: 'cool', icon: Snowflake, color: '#3B82F6' },
@@ -20,9 +21,7 @@ function AcModePane({ acMode, onAcModeChange }: { acMode: AcMode; onAcModeChange
 		<div className={css.acModes}>
 			{acModes.map(({ id, icon: Icon, color }) => (
 				<button key={id} className={css.acModeButton} onClick={() => onAcModeChange(id)}>
-					{acMode === id && (
-						<motion.div className={css.acModeIndicator} layoutId='acModeIndicator' transition={{ type: 'spring', stiffness: 400, damping: 40 }} />
-					)}
+					{acMode === id && <motion.div className={css.acModeIndicator} layoutId='acModeIndicator' transition={defaultComponentTransition} />}
 					<Icon size={18} strokeWidth={2} color={acMode === id ? color : cssVar('icon')} style={{ position: 'relative' }} />
 				</button>
 			))}
@@ -76,7 +75,7 @@ export function ControlPanel() {
 					</button>
 				</div>
 
-				<Collapsible open={active} className={css.settings} margin={10} blur>
+				<Collapsible open={active} className={css.settings} marginTop={10} blur>
 					{/* settings mode handler */}
 					<div className={css.mode} onClick={changeMode}>
 						<AnimatedText stagger={0.02} text={mode} />
@@ -84,13 +83,13 @@ export function ControlPanel() {
 					</div>
 
 					{/* manual settings panel */}
-					<Collapsible open={mode === 'Manual'} className={css.manualSettings} margin={4} padding={6} blur>
+					<Collapsible open={mode === 'Manual'} className={css.manualSettings} marginTop={4} padding={6} blur>
 						<AcModePane acMode={acMode} onAcModeChange={handleAcModeChange} />
 						<div className={css.fanSpeed}>
 							Fan speed
 							<Stepper current={fanSpeed} onChange={handleFanSpeedChange} />
 						</div>
-						<Collapsible open={isDirty} margin={10} blur>
+						<Collapsible open={isDirty} marginTop={10} blur>
 							<Button async onAsyncComplete={applySettings}>
 								Apply
 							</Button>
