@@ -5,8 +5,8 @@ function App() {
 	return (
 		<main className={css.main}>
 			<Sidebar />
-
-			{/* <ControlPanel /> */}
+			<FanMenu />
+			<ControlPanel />
 		</main>
 	);
 }

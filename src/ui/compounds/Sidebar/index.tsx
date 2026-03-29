@@ -36,7 +36,6 @@ export function Sidebar() {
 			<div>
 				<motion.button
 					className={cn(css.sidebarIcon, open && css.open)}
-					onClick={() => setOpen(prev => !prev)}
 					animate={{ opacity: open ? 1 : 0, x: open ? 164 : 0 }}
 					transition={defaultComponentTransition}>
 					<Plus size={16} color={cssVar('icon')} />

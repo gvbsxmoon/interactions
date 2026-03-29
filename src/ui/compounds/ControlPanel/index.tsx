@@ -9,7 +9,7 @@ import css from './ControlPanel.module.css';
 const defaultComponentTransition: Transition = { type: 'spring', stiffness: 300, damping: 30 };
 
 const acModes = [
-	{ id: 'heat', icon: Sun, color: '#F59E0B' },
+	{ id: 'heat', icon: Sun, color: cssVar('orange') },
 	{ id: 'cool', icon: Snowflake, color: '#3B82F6' },
 	{ id: 'dry', icon: Droplets, color: '#06B6D4' },
 ] as const;

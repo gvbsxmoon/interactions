@@ -1,6 +1,6 @@
 import { Box } from '@/ui/primitives';
 
-import css from './Sidebar.module.css';
+import css from './BrowserShell.module.css';
 
 const windowButtonColors = ['rgb(253, 94, 86)', 'rgb(250, 189, 64)', 'rgb(34, 200, 65)'] as const;
 
