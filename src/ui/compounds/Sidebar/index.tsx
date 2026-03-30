@@ -28,8 +28,7 @@ function SidebarColumn({ label, items, selected, onSelect }: { label: string; it
 
 export function Sidebar() {
 	const [open, setOpen] = useState(false);
-
-	const [selected, setSelected] = useState<number>(0);
+	const [selected, setSelected] = useState(0);
 
 	return (
 		<BrowserShell>
