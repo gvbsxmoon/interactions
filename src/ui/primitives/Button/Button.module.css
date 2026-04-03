@@ -17,8 +17,14 @@
 	min-height: 32px;
 }
 
+.light {
+	background: var(--surface);
+	color: var(--text);
+}
+
 .content {
 	display: flex;
+	position: relative;
 	align-items: center;
 	justify-content: center;
 	gap: 6px;

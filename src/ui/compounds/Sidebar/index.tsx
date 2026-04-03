@@ -6,7 +6,7 @@ import { BrowserShell, Collapsible } from '@/ui/primitives';
 
 import css from './Sidebar.module.css';
 
-const defaultComponentTransition: Transition = { type: 'spring', stiffness: 300, damping: 30 };
+const defaultComponentTransition: Transition = { type: 'spring', stiffness: 300, damping: 24 };
 
 function SidebarColumn({ label, items, selected, onSelect }: { label: string; items: unknown[]; selected: number; onSelect: (index: number) => void }) {
 	const [hovered, setHovered] = useState<number | null>(null);
@@ -35,14 +35,14 @@ export function Sidebar() {
 			<div>
 				<motion.button
 					className={cn(css.sidebarIcon, open && css.open)}
-					animate={{ opacity: open ? 1 : 0, x: open ? 164 : 0 }}
+					animate={{ opacity: open ? 1 : 0, x: open ? 180 : 0 }}
 					transition={defaultComponentTransition}>
 					<Plus size={16} color={cssVar('icon')} />
 				</motion.button>
 				<motion.button
 					className={cn(css.sidebarIcon, open && css.open)}
 					onClick={() => setOpen(prev => !prev)}
-					animate={{ x: open ? 192 : 0 }}
+					animate={{ x: open ? 204 : 0 }}
 					transition={defaultComponentTransition}>
 					{open ? <PanelLeftClose size={16} color={cssVar('icon')} /> : <PanelLeftOpen size={16} color={cssVar('icon')} />}
 				</motion.button>

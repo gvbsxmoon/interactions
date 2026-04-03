@@ -46,6 +46,11 @@
 
 /* ── Tokens ── */
 :root {
+	/* Fixed Sized */
+	--box-size: 440px;
+	--browser-size: 380px;
+
+	/* Colors */
 	--surface: oklch(97.015% 0.00011 271.152);
 	--surface-raised: oklch(98.511% 0.00011 271.152);
 	--bg: oklch(100% 0.00011 271.152);
@@ -60,21 +65,27 @@
 	--red: oklch(63.681% 0.20784 25.315);
 	--red-dim: oklch(63.681% 0.20784 25.315 / 0.1);
 	--orange: oklch(72.797% 0.17358 50.721);
-	--orange-dim: oklch(72.797% 0.17358 50.721 / 0.04);
+	--orange-dim: oklch(72.797% 0.17358 50.721 / 0.08);
 	--orange-hover: oklch(62.603% 0.1344 44.669);
 	--green: oklch(72.276% 0.19199 149.6);
 	--green-glow: oklch(72.276% 0.19199 149.6 / 0.25);
 	--yellow: oklch(79.524% 0.1616 86.05);
+
+	/* Fonts */
 	--font-sans: 'Geist Sans', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
 	--font-mono: 'Geist Mono', 'SF Mono', 'Fira Code', monospace;
-	--radius-xxl: 24px;
+
+	/* Radius */
+	--radius-3xl: 32px;
+	--radius-2xl: 24px;
+	--radius-2xl: 24px;
 	--radius-xl: 18px;
 	--radius-lg: 14px;
 	--radius-md: 10px;
 	--radius-sm: 6px;
-	--ease: cubic-bezier(0.16, 1, 0.3, 1);
-	--duration: 180ms;
-	--shadow-lg: 0 0 24px 2px oklch(0% 0 0 / 0.12);
+
+	/* Shadows */
+	--shadow-lg: 0 0 32px 4px oklch(0% 0 0 / 0.20);
 	--shadow-md: 0 0 24px 2px oklch(0% 0 0 / 0.08);
 	--shadow-sm: 0 0 16px oklch(0% 0 0 / 0.04);
 }

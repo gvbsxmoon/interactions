@@ -27,7 +27,7 @@
 	font-weight: 600;
 	background-color: var(--bg);
 	border: 2px solid var(--border);
-	border-radius: var(--radius-xxl);
+	border-radius: var(--radius-2xl);
 	box-shadow: var(--shadow-sm);
 }
 

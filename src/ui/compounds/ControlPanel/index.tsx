@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion, type Transition } from 'motion/react';
 import { ChevronsUpDown, Droplets, Minus, Plus, Snowflake, Sun } from 'lucide-react';
-import { Box, AnimatedText, Toggle, Stepper, Collapsible, Button } from '@/ui/primitives';
+import { Box, AnimatedText, Toggle, Stepper, Collapsible, Button, Loader } from '@/ui/primitives';
 import { cssVar } from '@/lib/utils';
 
 import css from './ControlPanel.module.css';
@@ -53,7 +53,7 @@ export function ControlPanel() {
 	const changeMode = () => setMode(m => (m === 'Automatic' ? 'Manual' : 'Automatic'));
 
 	return (
-		<Box>
+		<Box enhanceContrast>
 			<div className={css.container}>
 				{/* header */}
 				<div className={css.header}>
@@ -90,7 +90,7 @@ export function ControlPanel() {
 							<Stepper current={fanSpeed} onChange={handleFanSpeedChange} />
 						</div>
 						<Collapsible open={isDirty} marginTop={10} blur>
-							<Button async onAsyncComplete={applySettings}>
+							<Button async onAsyncComplete={applySettings} loader={Loader.Spinner()}>
 								Apply
 							</Button>
 						</Collapsible>

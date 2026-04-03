@@ -1,17 +1,35 @@
-.loader {
-	width: 10px;
-	height: 10px;
+.pulse {
+	width: 14px;
+	height: 14px;
 	border-radius: 50%;
-	animation: pulse 2s ease-in-out infinite;
+	animation: pulse 1.8s ease-in-out infinite;
 }
 
 @keyframes pulse {
 	0%, 100% {
 		opacity: 0.9;
-		transform: scale(0.9);
+		transform: scale(0.8);
 	}
 	50% {
 		opacity: 1;
 		transform: scale(1);
 	}
+}
+
+.spinner {
+	border-radius: 50%;
+	border-width: 2px;
+	border-style: dashed;
+	animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+	from { transform: rotate(0deg); }
+	to { transform: rotate(360deg); }
+}
+
+.progressBar {
+	position: absolute;
+	inset: 0;
+	height: 100%;
 }

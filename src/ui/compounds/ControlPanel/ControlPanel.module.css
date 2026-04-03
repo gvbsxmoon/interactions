@@ -1,7 +1,7 @@
 /* container */
 .container {
 	padding: 6px;
-	min-width: 220px;
+	min-width: 260px;
 	border-radius: var(--radius-xl);
 	box-shadow: var(--shadow-sm);
 	background-color: var(--bg);

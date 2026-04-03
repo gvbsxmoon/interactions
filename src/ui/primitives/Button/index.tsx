@@ -1,71 +1,120 @@
-import { type ReactNode, useState } from 'react';
+import { type ComponentProps, type ReactNode, type RefObject, useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import { Check } from 'lucide-react';
-
 import { cn } from '@/lib/utils';
-import { Loader } from '@/ui/primitives';
+
 import css from './Button.module.css';
+import { type LoaderComponent } from '../Loader';
 
 type AsyncPhase = 'idle' | 'loading' | 'done';
+type ButtonVariant = 'default' | 'light';
 
-const transition = { type: 'spring' as const, stiffness: 300, damping: 25 };
+const DONE_DISPLAY_MS = 800;
 
-const phaseVariants = {
-	initial: { opacity: 0, scale: 0.6, filter: 'blur(4px)' },
-	animate: { opacity: 1, scale: 1, filter: 'blur(0px)', transition },
-	exit: { opacity: 0, scale: 0.6, filter: 'blur(4px)', transition: { duration: 0.15 } },
-};
+const popTransition = { type: 'spring' as const, stiffness: 300, damping: 25 };
+
+const phaseAnimations = {
+	pop: {
+		initial: { opacity: 0, scale: 0.6, filter: 'blur(4px)' },
+		animate: { opacity: 1, scale: 1, filter: 'blur(0px)', transition: popTransition },
+		exit: { opacity: 0, scale: 0.6, filter: 'blur(4px)', transition: { duration: 0.15 } },
+	},
+	slide: {
+		initial: { opacity: 0, x: 20 },
+		animate: { opacity: 1, x: 0, transition: { duration: 0.25, ease: 'easeOut' } },
+		exit: { opacity: 0, x: -20, transition: { duration: 0.15, ease: 'easeIn' } },
+	},
+} as const;
+
+const accentByVariant = {
+	default: 'white',
+	light: 'black',
+} as const;
+
+type PhaseAnimation = keyof typeof phaseAnimations;
 
 type ButtonProps = {
 	children: ReactNode;
+	ref?: RefObject<HTMLButtonElement | null>;
 	onClick?: () => void;
 	className?: string;
+	variant?: ButtonVariant;
+	phaseAnimation?: PhaseAnimation;
 	async?: boolean;
+	asyncDuration?: number;
 	onAsyncComplete?: () => void;
+	loader: LoaderComponent;
+	animate?: ComponentProps<typeof motion.button>['animate'];
+	transition?: ComponentProps<typeof motion.button>['transition'];
 };
 
-export function Button({ children, onClick, className, async: withAsync = false, onAsyncComplete }: ButtonProps) {
+export function Button({
+	children,
+	ref,
+	onClick,
+	className,
+	variant = 'default',
+	phaseAnimation = 'pop',
+	async: isAsync = false,
+	asyncDuration = 1500,
+	onAsyncComplete,
+	loader: Loader,
+	animate,
+	transition,
+}: ButtonProps) {
 	const [phase, setPhase] = useState<AsyncPhase>('idle');
+	const accent = accentByVariant[variant];
+	const variants = phaseAnimations[phaseAnimation];
+	const busy = isAsync && phase !== 'idle';
 
 	const handleClick = () => {
-		if (!withAsync) {
-			onClick?.();
-			return;
-		}
-
-		if (phase !== 'idle') return;
-
 		onClick?.();
-		setPhase('loading');
 
+		if (!isAsync || phase !== 'idle') return;
+
+		setPhase('loading');
 		setTimeout(() => {
 			setPhase('done');
 			setTimeout(() => {
 				setPhase('idle');
 				onAsyncComplete?.();
-			}, 800);
-		}, 1500);
+			}, DONE_DISPLAY_MS);
+		}, asyncDuration);
 	};
 
 	return (
-		<button className={cn(css.button, className)} onClick={handleClick} disabled={withAsync && phase !== 'idle'}>
+		<motion.button
+			ref={ref}
+			className={cn(css.button, variant !== 'default' && css[variant], className)}
+			onClick={handleClick}
+			disabled={busy}
+			animate={animate}
+			transition={transition}>
 			<AnimatePresence mode='wait'>
 				{phase === 'idle' && (
-					<motion.div key='idle' className={css.content} variants={phaseVariants} initial='initial' animate='animate' exit='exit'>
+					<PhaseContent key='idle' variants={variants}>
 						{children}
-					</motion.div>
+					</PhaseContent>
 				)}
 				{phase === 'loading' && (
-					<motion.div key='loading' className={css.content} variants={phaseVariants} initial='initial' animate='animate' exit='exit'>
-						<Loader color='white' />
-					</motion.div>
+					<PhaseContent key='loading' variants={variants}>
+						<Loader duration={asyncDuration} />
+					</PhaseContent>
 				)}
 				{phase === 'done' && (
-					<motion.div key='done' className={css.content} variants={phaseVariants} initial='initial' animate='animate' exit='exit'>
-						<Check size={14} strokeWidth={3} />
-					</motion.div>
+					<PhaseContent key='done' variants={variants}>
+						<Check size={14} strokeWidth={3} color={accent} />
+					</PhaseContent>
 				)}
 			</AnimatePresence>
-		</button>
+		</motion.button>
+	);
+}
+
+function PhaseContent({ children, variants }: { children: ReactNode; variants: (typeof phaseAnimations)[keyof typeof phaseAnimations] }) {
+	return (
+		<motion.div className={css.content} variants={variants} initial='initial' animate='animate' exit='exit'>
+			{children}
+		</motion.div>
 	);
 }

@@ -86,7 +86,7 @@ export function FanMenu() {
 
 	return (
 		<>
-			<Box ref={containerRef}>
+			<Box ref={containerRef} enhanceContrast>
 				<AnimatePresence>
 					{isOpen &&
 						menuData.map((e, i) => (

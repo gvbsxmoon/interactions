@@ -1,0 +1,19 @@
+.container {
+	padding: 2px;
+	display: flex;
+	align-items: center;
+	background-color: var(--surface);
+	border-radius: var(--radius-3xl);
+}
+
+.button {
+	display: flex;
+	align-items: center;
+	font-size: 14px;
+	font-weight: 600;
+	padding: 12px;
+	border-radius: inherit;
+}
+
+
+

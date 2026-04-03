@@ -6,5 +6,6 @@ import { Loader } from './Loader';
 import { Collapsible } from './Collapsible';
 import { Button } from './Button';
 import { BrowserShell } from './BrowserShell';
+import { TextInput } from './TextInput';
 
-export { Box, Toggle, AnimatedText, Stepper, Loader, Collapsible, Button, BrowserShell };
+export { Box, Toggle, AnimatedText, Stepper, Collapsible, Button, BrowserShell, TextInput, Loader };

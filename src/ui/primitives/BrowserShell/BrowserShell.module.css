@@ -1,13 +1,13 @@
 .browser {
 	width: 90%;
 	height: 90%;
-	position: relative;
 	margin-top: 10%;
 	margin-left: 10%;
+	position: relative;
 	border-top-left-radius: var(--radius-md);
 	background-color: var(--surface);
-	border-top: 1px solid var(--border);
-	border-left: 1px solid var(--border);
+	border-top: 1px solid var(--text-ghost);
+	border-left: 1px solid var(--text-ghost);
 	box-shadow: var(--shadow-lg);
 	overflow: hidden;
 }
